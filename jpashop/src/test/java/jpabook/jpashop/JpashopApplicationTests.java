@@ -1,10 +1,10 @@
-package com.in28minutes.rest.webservices.restful_web_services;
+package jpabook.jpashop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestfulWebServicesApplicationTests {
+class JpashopApplicationTests {
 
 	@Test
 	void contextLoads() {
