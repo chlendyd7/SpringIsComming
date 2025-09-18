@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -14,6 +15,7 @@ class MemberRepositoryTest {
 
     @Test
     @Transactional // 클래스 전체 트랜잭션 적용 가능
+    @Rollback(false) // 해당 데코레이터를 통해 rollback 하지 않음
     void testMember() {
         // given
         Member member = new Member();
