@@ -3,6 +3,7 @@ package jpabook.jpashop.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import jakarta.persistence.*;
 
 @Entity
 @Getter @Setter
@@ -12,8 +13,9 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery") //fetch = Lazy x 비소유 측이라 지연 로딩이 불가능
     private Order order;
+
 
     @Embedded
     private Address address;
