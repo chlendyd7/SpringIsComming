@@ -2,6 +2,7 @@ package jpabook.jpashop.domain.item;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-@Getter @Setter
+@Getter
 public abstract class Item {
 
     @Id
@@ -27,5 +28,22 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items", fetch = LAZY)
     private List<Category> categories = new ArrayList<>();
+
+    //==비즈니스 로직==//
+    public void addStcok(int quantity) {
+        this.stackQuantity += quantity;
+    }
+
+    /**
+     *
+     * stack 감소
+     */
+    public void removeStock(int quantity) {
+        int restStcok = this.stackQuantity -= quantity;
+        if (restStcok < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stackQuantity = restStcok;
+    }
 
 }
