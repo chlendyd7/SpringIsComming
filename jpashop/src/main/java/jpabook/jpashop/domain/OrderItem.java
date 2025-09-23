@@ -48,6 +48,6 @@ public class OrderItem {
     }
 
     public int getTotalPrice() {
-        return getOrder().getTotalPrice();
+        return getOrderPrice() * getCount();
     }
 }
