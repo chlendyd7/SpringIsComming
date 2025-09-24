@@ -24,14 +24,14 @@ public abstract class Item {
 
     private String name;
     private int price;
-    private int stackQuantity;
+    private int stockQuantity;
 
     @ManyToMany(mappedBy = "items", fetch = LAZY)
     private List<Category> categories = new ArrayList<>();
 
     //==비즈니스 로직==//
     public void addStcok(int quantity) {
-        this.stackQuantity += quantity;
+        this.stockQuantity += quantity;
     }
 
     /**
@@ -39,11 +39,11 @@ public abstract class Item {
      * stack 감소
      */
     public void removeStock(int quantity) {
-        int restStcok = this.stackQuantity - quantity;
+        int restStcok = this.stockQuantity - quantity;
         if (restStcok < 0) {
             throw new NotEnoughStockException("need more stock");
         }
-        this.stackQuantity = restStcok;
+        this.stockQuantity = restStcok;
     }
 
 }
